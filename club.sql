@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2025 a las 23:33:56
+-- Tiempo de generación: 03-11-2025 a las 01:24:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -34,7 +34,10 @@ CREATE TABLE `cajas` (
   `denominacion` varchar(50) NOT NULL,
   `descripcion` varchar(80) NOT NULL,
   `codigointerno` varchar(50) NOT NULL,
-  `activo` tinyint(1) DEFAULT 1
+  `activo` tinyint(1) DEFAULT 1,
+  `fecha_alta` datetime DEFAULT current_timestamp(),
+  `fecha_edicion` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha_borrado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -48,7 +51,10 @@ CREATE TABLE `recaudadores` (
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `dni` varchar(30) NOT NULL,
-  `activo` tinyint(1) DEFAULT 1
+  `activo` tinyint(1) DEFAULT 1,
+  `fecha_alta` datetime DEFAULT current_timestamp(),
+  `fecha_edicion` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha_borrado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -67,7 +73,10 @@ CREATE TABLE `socios` (
   `dni` varchar(30) NOT NULL,
   `email` varchar(80) DEFAULT NULL,
   `id_zona` int(11) NOT NULL,
-  `activo` tinyint(1) DEFAULT 1
+  `activo` tinyint(1) DEFAULT 1,
+  `fecha_alta` datetime DEFAULT current_timestamp(),
+  `fecha_edicion` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha_borrado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -83,7 +92,10 @@ CREATE TABLE `usuarios` (
   `username` varchar(80) NOT NULL,
   `clave` varchar(200) NOT NULL,
   `dni` varchar(30) NOT NULL,
-  `activo` tinyint(1) DEFAULT 1
+  `activo` tinyint(1) DEFAULT 1,
+  `fecha_alta` datetime DEFAULT current_timestamp(),
+  `fecha_edicion` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha_borrado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -95,7 +107,10 @@ CREATE TABLE `usuarios` (
 CREATE TABLE `zonas` (
   `id` int(11) NOT NULL,
   `denominacion` varchar(80) NOT NULL,
-  `activo` tinyint(1) DEFAULT 1
+  `activo` tinyint(1) DEFAULT 1,
+  `fecha_alta` datetime DEFAULT current_timestamp(),
+  `fecha_edicion` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha_borrado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
