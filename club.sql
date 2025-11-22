@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2025 a las 01:17:20
+-- Tiempo de generación: 22-11-2025 a las 23:09:19
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -90,7 +90,8 @@ CREATE TABLE `recaudadores` (
   `fecha_alta` datetime DEFAULT current_timestamp(),
   `fecha_edicion` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `fecha_borrado` datetime DEFAULT NULL,
-  `telefono` int(30) NOT NULL
+  `telefono` int(30) NOT NULL,
+  `id_zona` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -133,6 +134,13 @@ CREATE TABLE `usuarios` (
   `fecha_edicion` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `fecha_borrado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `username`, `clave`, `dni`, `activo`, `fecha_alta`, `fecha_edicion`, `fecha_borrado`) VALUES
+(2, 'Admin', 'Admin', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '00000000', 1, '2025-11-03 19:25:54', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -179,7 +187,8 @@ ALTER TABLE `pagos`
 --
 ALTER TABLE `recaudadores`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_caja` (`id_caja`);
+  ADD KEY `id_caja` (`id_caja`),
+  ADD KEY `recaudadores_zonas_fk` (`id_zona`);
 
 --
 -- Indices de la tabla `socios`
@@ -238,7 +247,7 @@ ALTER TABLE `socios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`
@@ -262,7 +271,9 @@ ALTER TABLE `pagos`
 -- Filtros para la tabla `recaudadores`
 --
 ALTER TABLE `recaudadores`
-  ADD CONSTRAINT `recaudadores_ibfk_1` FOREIGN KEY (`id_caja`) REFERENCES `cajas` (`id`);
+  ADD CONSTRAINT `recaudadores_ibfk_1` FOREIGN KEY (`id_caja`) REFERENCES `cajas` (`id`),
+  ADD CONSTRAINT `recaudadores_zonas_fk` FOREIGN KEY (`id_zona`) REFERENCES `zonas` (`id`),
+  ADD CONSTRAINT `recuadadores_zonas_fk` FOREIGN KEY (`id_zona`) REFERENCES `zonas` (`id`);
 
 --
 -- Filtros para la tabla `socios`
